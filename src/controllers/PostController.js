@@ -4,15 +4,29 @@ import Post from "../models/Post.js";
 const Posts = mongoose.model("Posts");
 
 export function store(req, res) {
-  const body = req.body;
+  const { caption, user, comments } = req.body;
+  const { originalname: imageName, size, filename: key } = req.file;
 
-  Posts.create(body, (err, data) => {
-    if (err) {
-      res.status(500).send(err);
-    } else {
-      res.status(201).send(data);
+  console.log(req.file);
+
+  Posts.create(
+    {
+      caption,
+      user,
+      comments,
+      imageName,
+      size,
+      key,
+      url: "",
+    },
+    (err, data) => {
+      if (err) {
+        res.status(500).send(err);
+      } else {
+        res.status(201).send(data);
+      }
     }
-  });
+  );
 }
 
 export function index(req, res) {

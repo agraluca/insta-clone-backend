@@ -9,10 +9,12 @@ const PostSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  image: {
-    type: String,
-    required: true,
-  },
+
+  imageName: String,
+  size: Number,
+  key: String,
+  url: String,
+
   comments: [],
   createdAt: {
     type: Date,
